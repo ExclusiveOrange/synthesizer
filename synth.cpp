@@ -30,6 +30,20 @@
 		stuff;
 		here;
 	}
+
+Alternate Formatting (seems to be easier to read):
+
+	// any number of parameters
+	void
+	name (
+		parameter
+		, another parameter
+		, last parameter
+	) {
+		do;
+		stuff;
+		here;
+	}
 */
 
 // make certain we are compiling with the correct SDK

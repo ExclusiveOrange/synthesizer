@@ -59,9 +59,10 @@ namespace decaytable {
 		elementtype diff;
 	} table[ tablesize + table_extra ];
 
-	double lookup( double );
-
-	void init() {
+	void
+	init (
+		void
+	) {
 		const auto step = 1.0 / ( tablesize - 1 );
 
 		table[ 0 ].val = 1.0;
@@ -77,7 +78,10 @@ namespace decaytable {
 		}
 	}
 
-	double lookup( double zero_to_one ) {
+	double
+	lookup(
+		double zero_to_one
+	) {
 		auto composite = (int64_t)( zero_to_one * resolution_mask );
 		auto index = composite >> weightbits;
 		auto weight = composite & weightresolution_mask;

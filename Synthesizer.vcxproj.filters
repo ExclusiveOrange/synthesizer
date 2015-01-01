@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="nregister.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nrpngen.compact.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nrpngen.funcs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nrpngen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nrpngen.insttable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nrpngen.optable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nrpngen.readsource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nsource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="naudiodevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.add.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.addprod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.dispatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.exp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.fill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.mul.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.muladd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.noise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.sawb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.sawf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.sin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.sqr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.sub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.tri.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nfilter.cdelay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nfilter.ciir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nfilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ninstance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ninstance.instantiate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ninstance.instantiate.handlers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ninstance.sinstance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ninstruction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlistener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.add.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.addprod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.exp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.fill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.mul.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.muladd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.noise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.sawb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.sawf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.sin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.sqr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.sub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.tri.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nmain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nmain.thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nmultithread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dSFMT-src-2.2.1\dSFMT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nrandom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sintable\sintable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ncircularbuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nclip.decay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlowlevel.decay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="decaytable\decaytable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="synth.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dSFMT-src-2.2.1\dSFMT.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

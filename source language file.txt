@@ -1,0 +1,113 @@
+Source Language File
+
+Sources are read from special files that must follow specific formatting rules.
+This document describes those rules.
+
+Errata:
+	Expressions may contain variables.
+		Stored as double precision floating point.
+		Scope is from its first use until the end of file.
+		Initial value is 0 until assigned.
+		Naming limitations:
+			Must begin with a letter.
+			May contain only letters and numbers.
+			Must not be a name already in use by a register (r0..r7), an instruction, or a filter.
+	Time statements have changed slightly:
+		There are three implementations of a time statement:
+			full, where the first expression is the start time and the second the end time:
+				1, 2;
+			short, where the start time is taken from the last used end time, and the end time is the expression following the comma:
+				, 3;
+			additive, where the start time is taken from the last used end time, and the end time is the start time plus the expression following the plus symbol:
+				+1;
+
+Interpreter
+	A source file is opened, read in one pass, and closed.
+	There is no flow control (loops, jumps).
+	Random number parameters are generated per instance.
+
+Comments
+	There are two types of comments:
+		single line comments
+			these start with an apostrophe and end with the line
+		block comments
+			these start with a double quote " and end with another double quote "
+	Everything within a comment is ignored.
+	Block comments may be present anywhere without disrupting interpretation.
+	Example comments:
+		fill r1, 250; 'this is a comment
+		sine r0 "destination register", 1 "magnitude", r1 "frequency register", 0 "phase";
+
+Expressions
+	Number:
+		A number begins either with a zero 0 or a period . or a minus -
+		A number may contain at most one period .
+		A number may contain an exponent, indicated by a lower case e
+			and followed immediately by an integer exponent.
+		A number may contain the following symbols:
+			0 through 9
+			period .
+			e followed by an exponent
+		Example numbers:
+			0
+			7
+			.125
+			0.125
+			1.25e-1
+			-1.25e-1
+			10.5e6
+	Random:
+		Uniform:
+			A binary operator using the hash/pound symbol #
+			The left operand is the inclusive lower bound,
+			the right operand is the inclusive upper bound.
+			The random number generated will be different for every instance of the source.
+			Example uniform random numbers:
+				0 # 1 ' the final number will be anywhere in [0, 1]
+				5.1e6 # (2.5e6 * 1.2^5) ' any valid expression can be used as an operand
+		Gaussian:
+			A binary operator using the ampersat/at symbol @
+			The left operand is the mean/mu,
+			the right operand is the standard deviation/sigma.
+			Example gaussian random numbers:
+				0 @ 0.5 ' evaluates to a random number, normally distributed around 0, with a
+					standard deviation of 0.5
+				500 @ 20 ' evaluates to a random number, normally distributed around 500, with
+					a standard deviation of 20
+
+Time Statement
+	A time statement is nameless and consists of up to two numbers, indicating
+		respectively the start time and end time.
+	The times in a time statement are used in all subsequent instructions that use
+		such, until the next time statement.
+	The start time and end time must be seperated with a comma.
+	The time statement must be ended with a semicolon.
+	The first number may be omitted, leaving a comma and the second number.
+		When this is done, the start time is assumed to be the previous end time.
+		If there is not a previous end time, the start time will become 0.
+	Example time statements:
+		0, 1;
+		.25, 1.5;
+		,2; 'start time is assumed to be 1.5
+		,2.5; 'start time is assumed to be 2
+
+Instruction Command
+	An instruction command is the name of an instruction and its parameters,
+		ended by a semicolon.
+	Instructions are performed in the order they are written in the source file.
+	Parameters are seperated by a comma.
+	Some parameters may be omitted, but only if the type can be inferred.
+		When this is done, the last parameter in this or a previous instruction of
+		the appropriate type is used.
+		A seperating comma must still be used.
+	Example instructions:
+		fill r3, 0.25; 'fill is the name, r3 is the destination, 0.25 is the value
+		mul r3, , r2; 'the second parameter is assumed to be r3 in this case
+		add r0, r1, r3;
+
+Filter Command
+	A filter command is the name of a filter and its parameters, ended by a
+		semicolon.
+	The difference between an instruction and a filter is that a filter is
+		performed after all instructions, and always on register 0.
+	Filters are performed in the order they are written in the source file.

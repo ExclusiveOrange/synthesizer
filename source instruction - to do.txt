@@ -1,0 +1,36 @@
+maybe add some more combined instructions
+
+already have addprod and muladd
+
+maybe sineadd, sinemul, sinemuladd, sineaddprod, or whatever
+
+might need to carefully consider how these are named
+
+do the same for other types of waves
+
+lots of extra instructions, but should help performance significantly
+
+
+also:
+
+maybe add support for a custom wave, which could be cached in a lookup table, since that worked
+so well in sintable.
+
+unsure whether to make that in a different language, or somehow integrate it into this one:
+
+for example, add extra registers w0..w7 or however many, that are accepted in place of the r0..7 registers.
+unlike those registers, however, the duration would only range from [0..1)
+frequency parameters would have to change to accomodate: hertz doesn't make sense anymore, so instead
+it could perhaps be cycles per [0..1)
+so to make just one whole sine wave in a w register:
+
+0, 1;
+sine w0, 1, 1, 0;
+
+and that's it.
+
+Using w registers as input:
+
+wave reg dest, wreg input, scalar mag, reg/scalar freq, reg/scalar phase
+^ this poses a problem, though: too many parameters to an instruction (see "source instructions.txt")
+^ it might be practical to omit the phase parameter...

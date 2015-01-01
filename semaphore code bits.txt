@@ -1,0 +1,107 @@
+/*
+namespace worker {
+	HANDLE hsemaphore;
+
+	struct sWorker {
+		int instcount;
+		ndispatch::sInstruction *insts;
+	};
+
+	DWORD WINAPI threadproc(void *param) {
+		ndispatch::aRegs regs;
+		sWorker *worker = (sWorker*)param;
+		DWORD dwwaitresult;
+
+		dwwaitresult = WaitForSingleObject(hsemaphore, 0);
+		switch (dwwaitresult) {
+			case WAIT_OBJECT_0:
+				printf("worker started with %u instructions\n", worker->instcount);
+				for (int i = 0; i < worker->instcount; ++i) {
+					ndispatch::dispatch(regs, worker->insts + i);
+				}
+				if (!ReleaseSemaphore(hsemaphore, 1, 0)) {
+					printf("ReleaseSemaphore failed\n");
+				}
+				break;
+			case WAIT_TIMEOUT:
+				printf("thread timed out waiting for semaphore\n");
+				break;
+		}
+		printf("thread ending\n");
+		return TRUE;
+	}
+}
+*/
+
+
+
+	//const int workercount = 1;
+	//worker::sWorker *workers;
+	//HANDLE hworkers[workercount];
+	//int instruction_count = 128 * 1024;
+	//ndispatch::sInstruction *insts;
+
+	//insts = new ndispatch::sInstruction [instruction_count];
+	//if (!insts) {
+	//	printf("main() failed to allocate %u bytes\n", sizeof(ndispatch::sInstruction) * instruction_count);
+	//} else {
+	//	ndispatch::initialize();
+
+	//	for (int i = 0; i < instruction_count; i += 8) {
+	//		for (int k = 0; k < 8; ++k) {
+	//			ndispatch::nfunctions::nslope::encode_slope(insts + i + k, k, 0, ndispatch::regsize, 1.0f / (float)k, 1.0f / (float)(k + i));
+	//		}
+	//		//float freq = (M_2PI * ((float)i / (float)instruction_count)) / (float)ndispatch::regsize;
+	//		//float phase = M_2PI * ((float)i / (float)instruction_count);
+	//		//ndispatch::nfunctions::nfill::encode_fill(insts + i, 6, 0, ndispatch::regsize, freq);
+	//		//ndispatch::nfunctions::nfill::encode_fill(insts + i + 1, 7, 0, ndispatch::regsize, phase);
+	//		//ndispatch::nfunctions::ncosine::encode_cosine_sa(insts + i + 2, 0, 0, ndispatch::regsize, freq, 7);
+	//		//ndispatch::nfunctions::ncosine::encode_cosine_ss(insts + i + 3, 1, 0, ndispatch::regsize, freq, phase);
+	//		//ndispatch::nfunctions::ncosine::encode_cosine_aa(insts + i + 4, 2, 0, ndispatch::regsize, 6, 7);
+	//		//ndispatch::nfunctions::ncosine::encode_cosine_as(insts + i + 5, 3, 0, ndispatch::regsize, 6, phase);
+	//		//ndispatch::nfunctions::ncosine::encode_cosine_sa(insts + i + 6, 4, 0, ndispatch::regsize, freq, 7);
+	//		//ndispatch::nfunctions::ncosine::encode_cosine_ss(insts + i + 7, 5, 0, ndispatch::regsize, freq, phase);
+	//	}
+
+	//	workers = new worker::sWorker [workercount];
+	//	if (!workers) {
+	//		printf("main() failed to allocate %u bytes\n", sizeof(worker::sWorker));
+	//	} else {
+	//		for (int i = 0; i < workercount; ++i) {
+	//			workers[i].instcount = instruction_count;
+	//			workers[i].insts = insts;
+	//		}
+
+	//		worker::hsemaphore = CreateSemaphore(0, workercount, workercount, 0);
+	//		if (worker::hsemaphore == 0) {
+	//			printf("CreateSemaphore error: %d\n", GetLastError());
+	//		}
+
+	//		double time;
+	//		time = dsecnd();
+
+	//		for (int i = 0; i < workercount; ++i) {
+	//			DWORD threadid;
+	//			hworkers[i] = CreateThread(0, sizeof(ndispatch::aRegs) + 1048576, worker::threadproc, workers + i, 0, &threadid);
+	//			if (hworkers[i] == 0) {
+	//				printf("CreateThread error: %d\n", GetLastError());
+	//			}
+	//		}
+
+	//		printf("Waiting for threads to finish...\n");
+	//		WaitForMultipleObjects(workercount, hworkers, TRUE, INFINITE);
+
+	//		time = dsecnd() - time;
+	//		__int64 samplecount = (__int64)instruction_count * (__int64)ndispatch::regsize * (__int64)workercount;
+	//		printf("%f seconds elapsed. %.03g samples per second.\n", time, (double)samplecount / time);
+
+	//		for (int i = 0; i < workercount; ++i) {
+	//			CloseHandle(hworkers[i]);
+	//		}
+	//		CloseHandle(worker::hsemaphore);
+
+	//		delete workers;
+	//	}
+	//	delete insts;
+	//}
+

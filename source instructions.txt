@@ -1,0 +1,92 @@
+Source Instructions
+
+Caveats
+	The noise instruction is limited.
+	Every time noise is used, it will produce different output.
+	If noise is used in a source, and that source is instantiated more than once,
+	do not expect it to sound exactly the same each time.
+	It is possible to fix this, and I may do so if it becomes necessary.
+	The apparent pitch of noise is proportional to the sample rate.
+
+	The delay filter is fairly useless in the context of a single source, and is
+	included because it is used elsewhere and was trivial to include here.
+
+Instantiated Instruction Format
+
+struct sinst {
+	float start;
+	float len;
+	unsigned char opcode;
+	unsigned char reg0;
+	unsigned char reg1;
+	unsigned char reg2;
+	float scalar_a;
+	float scalar_b;
+	float scalar_c;
+};
+
+Operation Codes
+
+00 no op
+--
+01 fill reg0 dest, scalar_a val
+--
+02 add reg0 dest, reg1 a, reg2 b
+03 add reg0 dest, reg1 a, scalar_a b
+--
+04 sub reg0 dest, reg1 a, reg2 b
+05 sub reg0 dest, reg1 a, scalar_a b
+06 sub reg0 dest, scalar_a a, reg1 b
+--
+07 mul reg0 dest, reg1 a, reg2 b
+08 mul reg0 dest, reg1 a, scalar_a b
+--
+09 addprod reg0 srcdest, reg1 a, reg2 b
+0a addprod reg0 srcdest, reg1 a, scalar_a b
+--
+0b sine reg0 dest, scalar_a amp, reg1 freq, reg2 phase
+0c sine reg0 dest, scalar_a amp, reg1 freq, scalar_b phase
+0d sine reg0 dest, scalar_a amp, scalar_b freq, reg1 phase
+0e sine reg0 dest, scalar_a amp, scalar_b freq, scalar_c phase
+--
+0f triangle reg0 dest, scalar_a amp, reg1 freq, reg2 phase
+10 triangle reg0 dest, scalar_a amp, reg1 freq, scalar_b phase
+11 triangle reg0 dest, scalar_a amp, scalar_b freq, reg1 phase
+12 triangle reg0 dest, scalar_a amp, scalar_b freq, scalar_c phase
+--
+13 square reg0 dest, scalar_a amp, reg1 freq, reg2 phase
+14 square reg0 dest, scalar_a amp, reg1 freq, scalar_b phase
+15 square reg0 dest, scalar_a amp, scalar_b freq, reg1 phase
+16 square reg0 dest, scalar_a amp, scalar_b freq, scalar_c phase
+--
+17 sawfore reg0 dest, scalar_a amp, reg1 freq, reg2 phase
+18 sawfore reg0 dest, scalar_a amp, reg1 freq, scalar_b phase
+19 sawfore reg0 dest, scalar_a amp, scalar_b freq, reg1 phase
+1a sawfore reg0 dest, scalar_a amp, scalar_b freq, scalar_c phase
+--
+1b sawback reg0 dest, scalar_a amp, reg1 freq, reg2 phase
+1c sawback reg0 dest, scalar_a amp, reg1 freq, scalar_b phase
+1d sawback reg0 dest, scalar_a amp, scalar_b freq, reg1 phase
+1e sawback reg0 dest, scalar_a amp, scalar_b freq, scalar_c phase
+--
+1f line reg0 dest, scalar_a a, scalar_b b
+--
+20 muladd reg0 srcdest, reg1 mul, reg2 add
+21 muladd reg0 srcdest, reg1 mul, scalar_a add
+22 muladd reg0 srcdest, scalar_a mul, reg1 add
+23 muladd reg0 srcdest, scalar_a mul, scalar_b add
+--
+24 noise reg0 dest, scalar_a low, scalar_b high
+--
+25 exp reg0 dest, reg1 a
+--
+26 decay reg0 dest
+--27 decay reg0 dest, scalar_a start, scalar_b end
+
+
+Filters
+
+f0 delay expr_delay
+--
+f1 lowpass expr_cutoff  - currently disabled
+f2 highpass expr_cutoff - currently disabled

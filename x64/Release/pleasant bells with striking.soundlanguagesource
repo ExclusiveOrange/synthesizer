@@ -1,0 +1,115 @@
+' Simple, more-efficient bells.
+' Sounds good with 20 instances per second distributed non-uniformly.
+
+
+halfstep = 2^(1/12);
+step = halfstep * halfstep;
+
+
+
+a1 = 27.5;
+b1 = a1 * step;
+c1 = b1 * halfstep;
+cf1 = c1 * halfstep;
+d1 = c1 * step;
+e1 = d1 * step;
+f1 = e1 * halfstep;
+g1 = f1 * step;
+gf1 = g1 * halfstep;
+
+
+
+duration = 7;
+baseAmplitude = 5 @ 1;
+
+minOctave = 2;
+maxOctave = 5.999999;
+octaveDivisor = 1;
+
+tremoloAmplitude = halfstep^(1/24);
+tremoloFrequency = 1/413;
+
+
+
+' decide bellKey
+yesno5 = 0 # (5/4);
+yesno5 -= yesno5 % 1;
+bellKey = c1 * yesno5;
+
+yesno = 1 - yesno5;
+yesno4 = 0 # (yesno * (4/3));
+yesno4 -= yesno4 % 1;
+bellKey += d1 * yesno4;
+
+yesno -= yesno4;
+yesno3 = 0 # (yesno * (3/2));
+yesno3 -= yesno3 % 1;
+bellKey += e1 * yesno3;
+
+yesno -= yesno3;
+yesno2 = 0 # (yesno * 1.999999999);
+yesno2 -= yesno2 % 1;
+bellKey += g1 * yesno2;
+
+yesno -= yesno2;
+bellKey += a1 * yesno;
+
+
+
+' decide octave
+octave = minOctave # maxOctave;
+octave -= octave % octaveDivisor;
+
+' set bell frequency
+bellFrequency = bellKey * 2^octave;
+' imperfection
+bellFrequency = bellFrequency @ 0.1;
+
+' set duration
+duration *= (440 / bellFrequency)^0.5;
+0, duration;
+
+' generate tremolo
+sine r3, bellFrequency * tremoloAmplitude - bellFrequency, bellFrequency * tremoloFrequency, 0;
+add r3, r3, bellFrequency;
+
+' decrease amplitude for higher frequencies
+amplitude = baseAmplitude / (bellFrequency^.5);
+
+' generate tone
+sine r2, amplitude, r3, 0;
+
+
+
+' generate ADSR envelope
+0, 1/128;
+line r1, 0, 1;
++1/128;
+fill r1, 1;
+, duration;
+line r1, 0, -7;
+exp r1, r1;
+duration-(1/128), duration;
+line r3, 1, 0;
+mul r1, r1, r3;
+
+
+
+' apply ADSR to tone and store to output
+0, duration;
+mul r0, r1, r2;
+
+
+
+' striking sound
+duration /= 512;
+0, duration;
+sine r2, amplitude / 2, bellFrequency * 24, 0;
+
+' ADSR for striking
+0, duration;
+sine r1, 1, 0.5 / duration, 0;
+mul r1, r1, r1;
+
+0, duration;
+addprod r0, r1, r2;

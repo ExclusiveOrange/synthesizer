@@ -1,0 +1,21 @@
+duration = 1/20;
+amplitude = 1/2;
+
+minFreq = 100;
+maxFreq = 15000;
+
+minRoot = minFreq ^ (1/2);
+maxRoot = maxFreq ^ (1/2);
+
+0, duration;
+line r1, minRoot, maxRoot;
+mul r2, r1, r1;
+'mul r2, r2, r2;
+
+sine r0, amplitude, r2, 0; 
+
+' ADSR
+0, duration;
+line r1, 0, -4;
+exp r1, r1;
+mul r0, r0, r1;

@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="soundlanguagesource">
+      <UniqueIdentifier>{cdbcb960-245d-412e-9c1a-eaf34f0e87c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="nregister.h">
@@ -209,5 +212,49 @@
     <ClCompile Include="dSFMT-src-2.2.1\dSFMT.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="x64\Release\benchmark.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\conditional test.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\Dorian.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\drop.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\pleasant bells with choosing.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\pleasant bells with striking.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\Pythagorean 5th.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\raindrop on solid.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\test.alien.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\test.simple.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\test.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\test.spaceships.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\waves perhaps.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
+    <None Include="x64\Release\wood.soundlanguagesource">
+      <Filter>soundlanguagesource</Filter>
+    </None>
   </ItemGroup>
 </Project>

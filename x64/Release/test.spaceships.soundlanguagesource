@@ -1,0 +1,44 @@
+'futuristic energy weapon
+
+d = 1 @ (1/3);
+m = 4/9;
+
+0,d/32;
+line r0, 0, m/2;
+,d*.75;
+fill r0, m/2;
+,d;
+line r0, m/2, 0;
+
+0, d/32;
+line r4, 0, m;
+,d;
+line r4, 0, -5;
+exp r4, r4;
+mul r4, r4, m;
+d - d/32, d;
+line r5, 1, 0;
+mul r4, r4, r5;
+
+0,d;
+line r1, 0, -7;
+exp r1, r1;
+
+max = 500 # 1000;
+min = 35 # 50;
+
+mul r1, r1, max - min;
+add r1, r1, min;
+
+triangle r2, 1, r1, 0;
+mul r0, r0, r2;
+
+mul r2, r1, 5;
+sawfore r2, 1, r2, 0;
+mul r2, r2, r4;
+add r0, r0, r2;
+
+mul r2, r1, 3;
+sawback r2, 1, r2, .5;
+mul r2, r2, r4;
+add r0, r0, r2;

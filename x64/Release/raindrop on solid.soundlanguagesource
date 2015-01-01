@@ -1,0 +1,8 @@
+' a somewhat crude representation of a raindrop colliding with a solid surface
+' sounds best when instantiation is uniformly distributed through time
+' a rate of 100000 instances per second sounds okay; more = better
+
+d = 1 / (13000 @ 2400);
+
+0, d;
+sine r0, 0.01, 0.5 / d, 0;

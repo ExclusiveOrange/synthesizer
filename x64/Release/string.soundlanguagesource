@@ -1,0 +1,147 @@
+' for what should be an A string, 110 Hz:
+'stringLengthMeters = 0.64;
+'stringTensionNewtons = 9.03 * 9.81;
+'stringKilogramsPerMeter = 4.466 * 10^(-3);
+'key =
+'	( 1 / ( 2 * stringLengthMeters ) )
+'	*
+'	( stringTensionNewtons / stringKilogramsPerMeter ) ^ 0.5;
+
+
+' setup notes
+halfstep = 2^(1/12);
+step = halfstep * halfstep;
+
+a1 = 27.5;
+b1 = a1 * step;
+c1 = b1 * halfstep;
+cf1 = c1 * halfstep;
+d1 = c1 * step;
+e1 = d1 * step;
+f1 = e1 * halfstep;
+g1 = f1 * step;
+gf1 = g1 * halfstep;
+
+
+' decide key
+yesno5 = 0 # (5/4);
+yesno5 -= yesno5 % 1;
+key = c1 * yesno5;
+
+yesno = 1 - yesno5;
+yesno4 = 0 # (yesno * (4/3));
+yesno4 -= yesno4 % 1;
+key += d1 * yesno4;
+
+yesno -= yesno4;
+yesno3 = 0 # (yesno * (3/2));
+yesno3 -= yesno3 % 1;
+key += e1 * yesno3;
+
+yesno -= yesno3;
+yesno2 = 0 # (yesno * 1.999999999);
+yesno2 -= yesno2 % 1;
+key += g1 * yesno2;
+
+yesno -= yesno2;
+key += a1 * yesno;
+
+
+' decide octave
+minOctave = 1;
+maxOctave = 2.999999;
+octaveDivisor = 1;
+octave = minOctave # maxOctave;
+octave -= octave % octaveDivisor;
+
+' set fundamental frequency
+fundamentalFrequency = (key * 2^octave) @ 0.1;
+
+' harmonic frequencies
+h1 = fundamentalFrequency;
+h2 = h1 * 2;
+h3 = h1 * 3;
+h4 = h1 * 4;
+h5 = h1 * 5;
+h6 = h1 * 6;
+h7 = h1 * 7;
+h8 = h1 * 8;
+h9 = h1 * 9;
+h10 = h1 * 10;
+h11 = h1 * 11;
+h12 = h1 * 12;
+h13 = h1 * 13;
+
+
+' decide duration
+duration = 5;
+duration *= (440 / fundamentalFrequency)^0.5;
+
+
+' set amplitude
+baseAmplitude = 5 @ 1;
+amplitude = baseAmplitude / (fundamentalFrequency^0.5);
+
+
+' harmonic amplitudes
+' the relative values of these determines the timbre of the string
+v1 = amplitude;
+v2 = v1 * 1/2;
+v3 = v1 * 1/3;
+v4 = v1 * 1/4;
+v5 = v1 * 1/5;
+v6 = v1 * 1/6;
+v7 = v1 * 1/7;
+v8 = v1 * 1/8;
+v9 = v1 * 1/9;
+v10 = v1 * 1/10;
+v11 = v1 * 1/11;
+v12 = v1 * 1/12;
+v13 = v1 * 1/13;
+	
+
+' generate some tones	
+0, duration;
+sine r1, v1, h1, 0;
+sine r2, v2, h2, 0;
+add r1, r1, r2;
+sine r2, v3, h3, 0;
+add r1, r1, r2;
+sine r2, v4, h4, 0;
+add r1, r1, r2;
+sine r2, v5, h5, 0;
+add r1, r1, r2;
+sine r2, v6, h6, 0;
+add r1, r1, r2;
+sine r2, v7, h7, 0;
+add r1, r1, r2;
+sine r2, v8, h8, 0;
+add r1, r1, r2;
+sine r2, v9, h9, 0;
+add r1, r1, r2;
+sine r2, v10, h10, 0;
+add r1, r1, r2;
+sine r2, v11, h11, 0;
+add r1, r1, r2;
+sine r2, v12, h12, 0;
+add r1, r1, r2;
+sine r2, v13, h13, 0;
+add r0, r1, r2;
+
+
+' generate ADSR envelope
+0, 1/128;
+line r1, 0, 1;
++1/128;
+fill r1, 1;
+, duration;
+line r1, 0, -6;
+exp r1, r1;
+duration-(1/128), duration;
+line r3, 1, 0;
+mul r1, r1, r3;
+
+
+' apply ADSR to tone and store to output
+0, duration;
+mul r0, r0, r1;

@@ -357,6 +357,22 @@
     <ClCompile Include="dSFMT-src-2.2.1\dSFMT.c" />
     <ClCompile Include="synth.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="x64\Release\benchmark.soundlanguagesource" />
+    <None Include="x64\Release\conditional test.soundlanguagesource" />
+    <None Include="x64\Release\Dorian.soundlanguagesource" />
+    <None Include="x64\Release\drop.soundlanguagesource" />
+    <None Include="x64\Release\pleasant bells with choosing.soundlanguagesource" />
+    <None Include="x64\Release\pleasant bells with striking.soundlanguagesource" />
+    <None Include="x64\Release\Pythagorean 5th.soundlanguagesource" />
+    <None Include="x64\Release\raindrop on solid.soundlanguagesource" />
+    <None Include="x64\Release\test.alien.soundlanguagesource" />
+    <None Include="x64\Release\test.simple.soundlanguagesource" />
+    <None Include="x64\Release\test.soundlanguagesource" />
+    <None Include="x64\Release\test.spaceships.soundlanguagesource" />
+    <None Include="x64\Release\waves perhaps.soundlanguagesource" />
+    <None Include="x64\Release\wood.soundlanguagesource" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

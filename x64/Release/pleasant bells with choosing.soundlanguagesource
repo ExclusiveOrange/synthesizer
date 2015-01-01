@@ -23,7 +23,7 @@ duration = 7;
 baseAmplitude = 10 @ 2;
 
 minOctave = 2;
-maxOctave = 5.999999;
+maxOctave = 8.999999;
 octaveDivisor = 1;
 
 tremoloAmplitude = halfstep^(1/24);

@@ -43,27 +43,27 @@ namespace naudiodevice {
 	XAUDIO2_VOICE_DETAILS voicedetails;
 	IXAudio2SourceVoice *sourcevoice = 0;
 
-	bool init (
+	bool init(
 		unsigned int rate
 	) {
-		CoInitializeEx(0, COINIT_MULTITHREADED);
+		CoInitializeEx( 0, COINIT_MULTITHREADED );
 		HRESULT hr;
-		hr = XAudio2Create(&xa2, 0, XAUDIO2_DEFAULT_PROCESSOR);
-		if (!FAILED(hr)) {
-			hr = xa2->CreateMasteringVoice(&mastervoice, XAUDIO2_DEFAULT_CHANNELS, rate, 0, 0, 0);
-			if (!FAILED(hr)) {
-				mastervoice->GetVoiceDetails(&voicedetails);
+		hr = XAudio2Create( &xa2, 0, XAUDIO2_DEFAULT_PROCESSOR );
+		if( !FAILED( hr ) ) {
+			hr = xa2->CreateMasteringVoice( &mastervoice, XAUDIO2_DEFAULT_CHANNELS, rate, 0, 0, 0 );
+			if( !FAILED( hr ) ) {
+				mastervoice->GetVoiceDetails( &voicedetails );
 				WAVEFORMATEX wfx;
 				wfx.wFormatTag = WAVE_FORMAT_IEEE_FLOAT;
 				wfx.nChannels = voicedetails.InputChannels;
 				wfx.nSamplesPerSec = voicedetails.InputSampleRate;
-				wfx.nAvgBytesPerSec = sizeof(float) * voicedetails.InputChannels * voicedetails.InputSampleRate;
-				wfx.nBlockAlign = sizeof(float) * voicedetails.InputChannels;
+				wfx.nAvgBytesPerSec = sizeof( float ) * voicedetails.InputChannels * voicedetails.InputSampleRate;
+				wfx.nBlockAlign = sizeof( float ) * voicedetails.InputChannels;
 				wfx.wBitsPerSample = 32;
 				wfx.cbSize = 0;
-				hr = xa2->CreateSourceVoice(&sourcevoice, (WAVEFORMATEX*)&wfx, XAUDIO2_VOICE_NOSRC, 1.0f, &voicecallback, 0, 0);
-				if (!FAILED(hr)) {
-					sourcevoice->Start(0, 0);
+				hr = xa2->CreateSourceVoice( &sourcevoice, (WAVEFORMATEX*)&wfx, XAUDIO2_VOICE_NOSRC, 1.0f, &voicecallback, 0, 0 );
+				if( !FAILED( hr ) ) {
+					sourcevoice->Start( 0, 0 );
 					return true;
 				}
 				mastervoice = 0;
@@ -83,25 +83,25 @@ namespace naudiodevice {
 		CoUninitialize();
 	}
 
-	void submitbuffer(float *buffer, unsigned int len, bool endofstream = false) {
-		XAUDIO2_BUFFER xa2buf = {0};
+	void submitbuffer( float *buffer, unsigned int len, bool endofstream = false ) {
+		XAUDIO2_BUFFER xa2buf = { 0 };
 		xa2buf.Flags = endofstream ? XAUDIO2_END_OF_STREAM : 0;
-		xa2buf.AudioBytes = sizeof(float) * voicedetails.InputChannels * len;
+		xa2buf.AudioBytes = sizeof( float ) * voicedetails.InputChannels * len;
 		xa2buf.pAudioData = (BYTE*)buffer;
-		sourcevoice->SubmitSourceBuffer(&xa2buf);
+		sourcevoice->SubmitSourceBuffer( &xa2buf );
 	}
 
-	void waitonbuffers (
+	void waitonbuffers(
 		unsigned int numbuffers
-		,DWORD milliseconds // may be INFINITE
+		, DWORD milliseconds // may be INFINITE
 	) {
 		XAUDIO2_VOICE_STATE state;
-		while (sourcevoice->GetState(&state), state.BuffersQueued >= numbuffers - 1) {
-			WaitForSingleObject(voicecallback.hbufferendevent, milliseconds);
+		while( sourcevoice->GetState( &state ), state.BuffersQueued >= numbuffers - 1 ) {
+			WaitForSingleObject( voicecallback.hbufferendevent, milliseconds );
 		}
 	}
 
-	void waitonend(DWORD milliseconds) {
-		WaitForSingleObject(voicecallback.hendevent, milliseconds);
+	void waitonend( DWORD milliseconds ) {
+		WaitForSingleObject( voicecallback.hendevent, milliseconds );
 	}
 }

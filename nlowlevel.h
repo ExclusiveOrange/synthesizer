@@ -4,6 +4,7 @@
 
 #include "nlowlevel.add.h"
 #include "nlowlevel.addprod.h"
+#include "nlowlevel.copy.h"
 #include "nlowlevel.decay.h"
 #include "nlowlevel.exp.h"
 #include "nlowlevel.fill.h"

@@ -54,6 +54,7 @@ namespace decaytable {
 
 	const auto table_extra = 16;
 
+	__declspec( align( 32 ) )
 	static struct element {
 		elementtype val;
 		elementtype diff;

@@ -31,7 +31,7 @@ namespace nmain {
 
 namespace nmain {
 	bool init() {
-		rate = 96000; // let's be reasonable until we can savagely optimize everything
+		rate = 48000; // let's be reasonable until we can savagely optimize everything
 		numthreads = 0; // 0 allows this to default
 		maxworkstacksize = 65536; // somewhat arbitrary
 

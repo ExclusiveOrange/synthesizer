@@ -20,8 +20,10 @@ namespace nlowlevel {
 		,const int len
 		,const double *src
 	) {
+		double src1 = src[ 0 ];
 		for (int i = 0; i < len; ++i) {
-			dest[i] = ::exp(src[i]);
+			dest[i] = ::exp(src1);
+			src1 = src[ i + 1 ];
 		}
 	}
 }		

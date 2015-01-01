@@ -32,7 +32,7 @@ namespace ninstance {
 	void sinstance::render(const double time) {
 		if (!insts || !accumulators) return;
 
-		nregister::zero(0);
+		nregister::zero0();
 
 		if (time < instduration) {
 			for (int i = 0; i < instcount; ++i) {

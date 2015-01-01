@@ -17,8 +17,10 @@ namespace nlowlevel {
 		,const double *a
 		,const double *b
 	) {
-		for (int i = 0; i < len; ++i) {
-			dest[i] = a[i] * b[i];
+		double ab = a[ 0 ] * b[ 0 ];
+		for(int i = 0; i < len; ++i) {
+			dest[ i ] = ab;
+			ab = a[ i + 1 ] * b[ i + 1 ];
 		}
 	}
 
@@ -28,8 +30,10 @@ namespace nlowlevel {
 		,const double *a
 		,const double b
 	) {
-		for (int i = 0; i < len; ++i) {
-			dest[i] = a[i] * b;
+		double ab = a[ 0 ] * b;
+		for(int i = 0; i < len; ++i) {
+			dest[ i ] = ab;
+			ab = a[ i + 1 ] * b;
 		}
 	}
 }

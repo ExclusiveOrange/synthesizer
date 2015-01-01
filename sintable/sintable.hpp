@@ -42,12 +42,13 @@ namespace sintable {
 	const auto weightresolution_r = 1.0 / weightresolution;
 	const auto weightresolution_mask = weightresolution - 1;
 	const auto resolution_mask = resolution - 1;
-	
+
 	typedef float elementtype;
 
+	__declspec( align( 32 ) )
 	static struct element {
-		elementtype val;	// sin( i * 2.0 * pi / tablesize )
 		elementtype diff;	// ( next.val - this.val ) / weightresolution
+		elementtype val;	// sin( i * 2.0 * pi / tablesize )
 	} table[ tablesize ];
 
 	const auto pi = 3.141592653589793;

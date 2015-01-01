@@ -247,7 +247,7 @@
       <FloatingPointModel>Precise</FloatingPointModel>
       <BrowseInformation>true</BrowseInformation>
       <EnablePREfast>false</EnablePREfast>
-      <AdditionalOptions>/Qvec-report:2 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/Qvec-report:2  /LD %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
@@ -325,6 +325,7 @@
     <ClInclude Include="nlistener.h" />
     <ClInclude Include="nlowlevel.add.h" />
     <ClInclude Include="nlowlevel.addprod.h" />
+    <ClInclude Include="nlowlevel.copy.h" />
     <ClInclude Include="nlowlevel.decay.h" />
     <ClInclude Include="nlowlevel.exp.h" />
     <ClInclude Include="nlowlevel.fill.h" />

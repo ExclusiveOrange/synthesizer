@@ -15,11 +15,14 @@ namespace nregister {
 	double rrate;
 	double duration;
 
-	__declspec(thread) double localreg[num][len];
+	__declspec(thread) __declspec(align(32)) double localreg[num][len];
 
-	void zero (
-		const int which
-	) {
-		memset(localreg[which], 0, sizeof(double) * len);
+	void zero0 () {
+		for(int i = 0; i < nregister::len; i += 4) {
+			nregister::localreg[ 0 ][ i ] = 0.0;
+			nregister::localreg[ 0 ][ i + 1 ] = 0.0;
+			nregister::localreg[ 0 ][ i + 2 ] = 0.0;
+			nregister::localreg[ 0 ][ i + 3 ] = 0.0;
+		}
 	}
 }

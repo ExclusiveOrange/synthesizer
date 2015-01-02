@@ -80,7 +80,7 @@ Time Statement
 		respectively the start time and end time.
 	The times in a time statement are used in all subsequent instructions that use
 		such, until the next time statement.
-	The start time and end time must be seperated with a comma.
+	The start time and end time must be separated with a comma.
 	The time statement must be ended with a semicolon.
 	The first number may be omitted, leaving a comma and the second number.
 		When this is done, the start time is assumed to be the previous end time.
@@ -88,8 +88,8 @@ Time Statement
 	Example time statements:
 		0, 1;
 		.25, 1.5;
-		,2; 'start time is assumed to be 1.5
-		,2.5; 'start time is assumed to be 2
+		,2; 'start time is assumed to be the previous end time, 1.5
+		,2.5; 'start time is assumed to be the previous end time, 2
 
 Instruction Command
 	An instruction command is the name of an instruction and its parameters,

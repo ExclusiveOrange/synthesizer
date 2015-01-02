@@ -223,6 +223,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <AdditionalDependencies>xaudio2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>false</Profile>
+      <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profiling|x64'">
@@ -352,6 +353,7 @@
     <ClInclude Include="nrpngen.optable.h" />
     <ClInclude Include="nrpngen.readsource.h" />
     <ClInclude Include="nsource.h" />
+    <ClInclude Include="restrict.h" />
     <ClInclude Include="sintable\sintable.hpp" />
   </ItemGroup>
   <ItemGroup>

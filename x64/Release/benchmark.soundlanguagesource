@@ -2,6 +2,7 @@
 ' as of 2014.12.30, goes fine 'till 3500, then breaks up around 3600
 ' (on Core 2 Quad 3.2 Ghz)
 ' 2015.01.01, goes fine through 3750 now, breaks up in the 3800's
+' 2014.01.01, goes fine through 3900 now, breaks up just past 4000
 
 
 halfstep = 2^(1/12);

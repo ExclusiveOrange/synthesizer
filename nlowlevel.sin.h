@@ -79,12 +79,13 @@ namespace nlowlevel {
 		,const double mag
 		,const double *freq
 		,double &phase
-	) {
-		double freq1 = freq[ 0 ] * rrate;
+	) {	
+		double freq1 = freq[ 0 ];
 		double freq2 = freq[ 1 ];
-		double phase1 = phase + freq1;
-		for (int i = 0; i < len; ++i) {
-			dest[i] = mag * sine(phase1);
+		double phase1 = phase + freq1 * rrate;
+		int i = 0;
+		for( ; i < len; ++i ) {
+			dest[ i ] = mag * sine( phase1 );
 			freq1 = freq2 * rrate;
 			freq2 = freq[ i + 2 ];
 			phase1 += freq1;

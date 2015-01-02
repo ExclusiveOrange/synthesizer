@@ -32,7 +32,7 @@ namespace nfilter {
 				if (len >= this->len) { // block is larger than delay line
 					ncircularbuffer::unwrap(dest, line, this->len, cursor);
 					//memcpy(dest + this->len, src, sizeof(double) * (len - this->len));
-					nlowlevel::copy( dest + this->len, src, ( len - this->len ) );
+					nlowlevel::fastcopy_double( dest + this->len, src, ( len - this->len ) );
 					ncircularbuffer::wrap(line, src + (len - this->len), this->len, cursor);
 				} else { // block is smaller than delay line
 					cursor = ncircularbuffer::unwrap_partial(dest, line, this->len, cursor, len);

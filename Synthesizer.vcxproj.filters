@@ -207,6 +207,9 @@
     <ClInclude Include="nlowlevel.copy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="restrict.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="synth.cpp">

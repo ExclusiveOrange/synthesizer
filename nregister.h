@@ -15,7 +15,8 @@ namespace nregister {
 	double rrate;
 	double duration;
 
-	__declspec(thread) __declspec(align(32)) double localreg[num][len];
+	// we allocate one extra register so that sloppy-fast memory reads can read past r7 without breaking
+	__declspec(thread) __declspec(align(64)) double localreg[num + 1][len];
 
 	void zero0 () {
 		for(int i = 0; i < nregister::len; i += 4) {

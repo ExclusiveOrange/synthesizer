@@ -30,10 +30,22 @@ namespace nlowlevel {
 		,const double *a
 		,const double b
 	) {
-		double src_plus_ab = srcdest[ 0 ] + a[ 0 ] * b;
-		for(int i = 0; i < len; ++i) {
-			srcdest[ i ] = src_plus_ab;
-			src_plus_ab = srcdest[ i + 1 ] + a[ i + 1 ] * b;
+		if( len < 1 ) return;
+		double a0 = a[ 0 ];
+		double src0 = srcdest[ 0 ];
+		int i = 0;
+		for( ; i < len - 1; ++i ) {
+			double ab = a0 * b;
+			a0 = a[ i + 1 ];
+			srcdest[ i ] = src0 + ab;
+			src0 = srcdest[ i + 1 ];
 		}
+		srcdest[ i ] = src0 + a0 * b;
+
+		//if( len < 1 ) return;
+
+		//int i = 0;
+		//for( ; i < len && (int&)srcdest[i] & 31; ++i ) {
+
 	}
 }

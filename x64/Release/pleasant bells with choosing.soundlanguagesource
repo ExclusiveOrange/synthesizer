@@ -1,11 +1,8 @@
-' Simple, more-efficient bells.
-' Sounds good with 20 instances per second distributed non-uniformly.
+' Simple bell-like sound.
 
 
 halfstep = 2^(1/12);
 step = halfstep * halfstep;
-
-
 
 a1 = 27.5;
 b1 = a1 * step;
@@ -84,9 +81,11 @@ sine r2, amplitude, r3, 0;
 ' generate ADSR envelope
 ramptime = duration / 1024;
 
+' new exponential decay instruction
 0, duration;
 decay r1;
 
+' attack
 0, ramptime;
 line r4, 0, 1;
 mul r1, r1, r4;

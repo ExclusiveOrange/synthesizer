@@ -1,3 +1,3 @@
 @echo off
-synthesizer.exe "benchmark.soundlanguagesource" 1000
+synthesizer.exe "benchmark.soundlanguagesource" 1200
 pause

@@ -248,7 +248,7 @@
       <FloatingPointModel>Precise</FloatingPointModel>
       <BrowseInformation>true</BrowseInformation>
       <EnablePREfast>false</EnablePREfast>
-      <AdditionalOptions>/Qvec-report:2  /LD %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/LD %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
@@ -257,6 +257,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <GenerateMapFile>true</GenerateMapFile>
       <OptimizeReferences>true</OptimizeReferences>
+      <StackReserveSize>
+      </StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

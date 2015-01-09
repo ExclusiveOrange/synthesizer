@@ -23,6 +23,31 @@ notes:
 	tuned to give good results for cycles < 2^33;
 		beyond that, precision will begin to degrade
 
+todo:
+
+	the limiting factor seems to be the apparently random memory
+		accesses
+	when several lookups are needed, it might be advantageous to
+		perform the operation in three steps:
+
+		1.	given a small array of "cycles", calculate and store
+				(int index, int weight) pairs
+		2.	given a small array of (index, weight) pairs,
+				prefetch (diff, val) pairs, and calculate and store
+				(diff, float weight, val) triplets
+		3.	given a small array of (diff, weight, val) triplets,
+				calculate and store val + diff * weight
+
+	tuning the size of such arrays will be tricky, and efficiently dealing
+		with triplets may necessitate aligning them either with a filler dword,
+		or by keeping 'weight' in a separate list
+		(though it may not be necessary to align them)
+
+	the idea here is that if we keep the number of lookups fairly small,
+		then the processor should be able to keep the results in L0 cache,
+		so that by the time we calculate the final values, their components
+		are ready and waiting
+
 */
 
 #pragma once
@@ -37,7 +62,7 @@ namespace sintable {
 	const auto weightbits = 10;
 	const auto weightresolution = 1 << weightbits;
 	const auto resolution = weightresolution << tablebits;
-	
+
 	// these are to help stupid compilers with optimisation
 	const auto weightresolution_r = 1.0 / weightresolution;
 	const auto weightresolution_mask = weightresolution - 1;
@@ -45,11 +70,11 @@ namespace sintable {
 
 	typedef float elementtype;
 
-	__declspec( align( 32 ) )
+	__declspec( align( 64 ) )
 	static struct element {
 		elementtype diff;	// ( next.val - this.val ) / weightresolution
 		elementtype val;	// sin( i * 2.0 * pi / tablesize )
-	} table[ tablesize ];
+	} table[ tablesize + 1 ];
 
 	const auto pi = 3.141592653589793;
 	

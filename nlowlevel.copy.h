@@ -14,6 +14,7 @@ namespace nlowlevel {
 		double src2 = src[ 2 ];
 		double src3 = src[ 3 ];
 		int i = 0;
+		// todo: change to i <= ( len - 4 )
 		for( ; ( len - i ) >= 4; i += 4 ) {
 			dest[ i ] = src0;
 			dest[ i + 1 ] = src1;
@@ -24,12 +25,12 @@ namespace nlowlevel {
 			src2 = src[ i + 6 ];
 			src3 = src[ i + 7 ];
 		}
-		if( len > i ) {
+		if( len > i + 1 ) {
 			dest[ i ] = src0;
-			if( len > i + 1 ) {
-				dest[ i + 1 ] = src1;
-				if( len > i + 2 ) dest[ i + 2 ] = src2;
-			}
+			dest[ i + 1 ] = src1;
+			if( len > i + 2 ) dest[ i + 2 ] = src2;
+		} else if( len > i ) {
+			dest[ i ] = src0;
 		}
 	}
 }

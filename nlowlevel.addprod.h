@@ -10,6 +10,8 @@ srcdest[i] += a[i] * [b | b[i]
 
 #pragma once
 
+#include "restrict.h"
+
 namespace nlowlevel {
 	void addprod (
 		double *srcdest
@@ -41,11 +43,5 @@ namespace nlowlevel {
 			src0 = srcdest[ i + 1 ];
 		}
 		srcdest[ i ] = src0 + a0 * b;
-
-		//if( len < 1 ) return;
-
-		//int i = 0;
-		//for( ; i < len && (int&)srcdest[i] & 31; ++i ) {
-
 	}
 }

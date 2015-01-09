@@ -8,14 +8,14 @@ usage:
 #pragma once
 
 namespace nregister {
-	const int len = 1024;
+	const int len = 4096; /* 2048, 4096 are good choices apparently */
 	const int num = 8;
 
 	double rate;
 	double rrate;
 	double duration;
 
-	// we allocate one extra register so that sloppy-fast memory reads can read past r7 without breaking
+	// we allocate one extra register so that sloppy-fast memory reads can read past the last named register without breaking
 	__declspec(thread) __declspec(align(64)) double localreg[num + 1][len];
 
 	void zero0 () {

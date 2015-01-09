@@ -120,7 +120,7 @@ int main(int argc, char *argv[]) {
 		}
 		
 		// crude hack to use second command line parameter as number of sources to add per second
-		double newprobability = 100.0; // default
+		double newprobability = 1000.0; // default for performance profiling
 		if(argc > 2 && argv[2]) {
 			// somewhat arbitrary limits
 			float minnewprobability = 1.0f / 1048576.0f;
@@ -142,6 +142,7 @@ int main(int argc, char *argv[]) {
 
 				//double newprobability = 20.0; // average number of sources added per second
 				double radius = 40.0;
+				double minradius = 5.0;
 				double minx = -radius;
 				double miny = -radius;
 				double maxx = radius;
@@ -177,7 +178,13 @@ int main(int argc, char *argv[]) {
 								if (listener) {
 									ninstance::sinstance *instance = ninstance::instantiate(rpnsource);
 									if (instance) {
-										if (listener->init(numchannels, ears, nrandom::uniform(-nregister::duration, 0.0), instance, nrandom::uniform(minx, maxx), nrandom::uniform(miny, maxy), mindistance)) {
+										double x, y;
+										do {
+											x = nrandom::uniform( minx, maxx );
+											y = nrandom::uniform( miny, maxy );
+										} while( sqrt( x * x + y * y ) < minradius );
+										double time = nrandom::uniform( -nregister::duration, 0.0 );
+										if (listener->init(numchannels, ears, time, instance, x, y, mindistance)) {
 											listenerstack.push_back(listener);
 										} else delete instance;
 									} else delete listener;

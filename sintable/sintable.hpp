@@ -1,6 +1,6 @@
 /* approximation of sine function using two interleaven tables
 	by Atlee Brink
-	version 2014.12.30
+	version 2015.01.10
 
 reference:
 
@@ -22,32 +22,7 @@ notes:
 
 	tuned to give good results for cycles < 2^33;
 		beyond that, precision will begin to degrade
-
-todo:
-
-	the limiting factor seems to be the apparently random memory
-		accesses
-	when several lookups are needed, it might be advantageous to
-		perform the operation in three steps:
-
-		1.	given a small array of "cycles", calculate and store
-				(int index, int weight) pairs
-		2.	given a small array of (index, weight) pairs,
-				prefetch (diff, val) pairs, and calculate and store
-				(diff, float weight, val) triplets
-		3.	given a small array of (diff, weight, val) triplets,
-				calculate and store val + diff * weight
-
-	tuning the size of such arrays will be tricky, and efficiently dealing
-		with triplets may necessitate aligning them either with a filler dword,
-		or by keeping 'weight' in a separate list
-		(though it may not be necessary to align them)
-
-	the idea here is that if we keep the number of lookups fairly small,
-		then the processor should be able to keep the results in L0 cache,
-		so that by the time we calculate the final values, their components
-		are ready and waiting
-
+		( 52 - ( 9 + 10 ) = 33 bits )
 */
 
 #pragma once
@@ -70,11 +45,10 @@ namespace sintable {
 
 	typedef float elementtype;
 
-	__declspec( align( 64 ) )
 	static struct element {
 		elementtype diff;	// ( next.val - this.val ) / weightresolution
 		elementtype val;	// sin( i * 2.0 * pi / tablesize )
-	} table[ tablesize + 1 ];
+	} table[ tablesize ];
 
 	const auto pi = 3.141592653589793;
 	
@@ -91,15 +65,15 @@ namespace sintable {
 		}
 		table[ tablesize - 1 ].diff = ( -table[ tablesize - 1 ].val ) * weightresolution_r;
 	}
-	
+
 	double
 	lookup (
 		double cycles
 	) {
-		auto composite = (int64_t)( cycles * resolution ) & resolution_mask;
-		auto index = composite >> weightbits;
+		auto composite = (int64_t)( cycles * resolution );
+		auto index = ( composite & resolution_mask ) >> weightbits;
 		auto weight = composite & weightresolution_mask;
 
-		return table[index].val + ( table[index].diff * weight );
+		return ( table[ index ].diff * weight ) + table[ index ].val;
 	}
 }

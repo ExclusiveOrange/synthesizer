@@ -81,16 +81,14 @@ namespace nlowlevel {
 		,double &phase
 	) {	
 		double freq0 = freq[ 0 ];
-		double freq1 = freq[ 1 ];
-		double phase0 = phase + freq0 * rrate;
+		double phase0 = phase;
 		int i = 0;
 		for( ; i < len; ++i ) {
 			dest[ i ] = mag * sine( phase0 );
-			freq0 = freq1 * rrate;
-			freq1 = freq[ i + 2 ];
-			phase0 += freq0;
+			phase0 += freq0 * rrate;
+			freq0 = freq[ i + 1 ];
 		}
-		phase = phase0 - freq0;
+		phase = phase0;
 	}
 
 	void sin ( // s a
@@ -118,11 +116,11 @@ namespace nlowlevel {
 		,const double freq
 		,double &phase
 	) {
-		double phase0 = phase + freq * rrate;
+		double phase0 = phase;
 		for (int i = 0; i < len; ++i) {
 			dest[i] = mag * sine(phase0);
 			phase0 += freq * rrate;
 		}
-		phase = phase0 - freq * rrate;
+		phase = phase0;
 	}
 }

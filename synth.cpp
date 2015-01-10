@@ -74,14 +74,14 @@ nlistener::sear *makeears() {
 				ears[0].set (
 					-0.1123, 0.0
 					,-M_PI2, 1.0
-					,M_PI2 * 0.3, 0.8
-					,M_PI2 * 0.35, 0.3
+					,M_PI2 * 0.5, 0.8
+					,M_PI2 * 0.8, 0.2
 				);
 				ears[1].set (
 					0.1123, 0.0
 					,M_PI2, 1.0
-					,M_PI2 * 0.3, 0.8
-					,M_PI2 * 0.35, 0.3
+					,M_PI2 * 0.5, 0.8
+					,M_PI2 * 0.8, 0.2
 				);
 				break;
 			default:

@@ -56,6 +56,7 @@ Alternate Formatting (seems to be easier to read):
 //#include "test.h"
 
 #include <cstdio> // may want to add to nmain.h
+#include <iostream>
 #include <list>
 
 using namespace nmain;
@@ -119,18 +120,15 @@ int main(int argc, char *argv[]) {
 			filename = argv[1];
 		}
 		
-		// crude hack to use second command line parameter as number of sources to add per second
-		double newprobability = 1000.0; // default for performance profiling
-		if(argc > 2 && argv[2]) {
-			// somewhat arbitrary limits
-			float minnewprobability = 1.0f / 1048576.0f;
-			float maxnewprobability = 1048576.0f;
-			float scannednewprobability = (float)newprobability;
-			int ret = sscanf(argv[2], "%f", &scannednewprobability);
-			if(ret == 1) {
-				scannednewprobability = max(minnewprobability, scannednewprobability);
-				scannednewprobability = min(maxnewprobability, scannednewprobability);
-				newprobability = (double)scannednewprobability;
+		// crude hack to use second command-line parameter as mean time between sources,
+		// on an exponential distribution.
+		double sourcegentimemean = 0.1;
+		if( argc > 2 && argv[2] ) {
+			try {
+				double ind = stod( argv[ 2 ] );
+				if( ind > 0.0 ) sourcegentimemean = ind;
+			} catch (...) {
+				// do nothing: a default was already set
 			}
 		}
 
@@ -140,7 +138,6 @@ int main(int argc, char *argv[]) {
 			nlistener::sear *ears = makeears();
 			if (ears) {
 
-				//double newprobability = 20.0; // average number of sources added per second
 				double radius = 40.0;
 				double minradius = 5.0;
 				double minx = -radius;
@@ -151,6 +148,7 @@ int main(int argc, char *argv[]) {
 				
 				// temporary
 				unsigned int maxlisteners = 0;
+				double sourcegentimewait = 0.0; // remainder
 
 				cout << "Playback begins.\nPress any key to quit.\n";
 
@@ -169,28 +167,29 @@ int main(int argc, char *argv[]) {
 								nmultithread::addwork(*iter);
 							} while (++iter != listenerstack.end());
 						}
-						printf("Listeners: %d          \r", (int)listenerstack.size());
+						cout << "listeners: " << listenerstack.size() << "            \r";
 
 						// add new listeners
-						{ int newcount = /*newprobability * nregister::duration;*/(int)nrandom::uniform(0.0, 1.0 + newprobability * nregister::duration);
-							for (; newcount > 0; --newcount) {
-								nlistener::clistener *listener = new nlistener::clistener;
-								if (listener) {
-									ninstance::sinstance *instance = ninstance::instantiate(rpnsource);
-									if (instance) {
-										double x, y;
-										do {
-											x = nrandom::uniform( minx, maxx );
-											y = nrandom::uniform( miny, maxy );
-										} while( sqrt( x * x + y * y ) < minradius );
-										double time = nrandom::uniform( -nregister::duration, 0.0 );
-										if (listener->init(numchannels, ears, time, instance, x, y, mindistance)) {
-											listenerstack.push_back(listener);
-										} else delete instance;
-									} else delete listener;
-								}
+						while( sourcegentimewait < nregister::duration ) {
+							// generate a listener at time: 'sourcegentimewait' into the current register
+							nlistener::clistener *listener = new nlistener::clistener;
+							if( listener ) {
+								ninstance::sinstance *instance = ninstance::instantiate( rpnsource );
+								if( instance ) {
+									// place instance within 'minradius' of the center of the ears
+									double x, y;
+									do {
+										x = nrandom::uniform( minx, maxx );
+										y = nrandom::uniform( miny, maxy );
+									} while( x * x + y * y < minradius * minradius );
+									if( listener->init( numchannels, ears, -sourcegentimewait, instance, x, y, mindistance ) ) {
+										listenerstack.push_back( listener );
+									} else delete instance;
+								} else delete listener;
 							}
+							sourcegentimewait += nrandom::exponential( sourcegentimemean );
 						}
+						sourcegentimewait -= nregister::duration;
 
 						// mix all thread outputs and convert to float
 						nmultithread::waitforidle(INFINITE);

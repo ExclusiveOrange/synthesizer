@@ -183,9 +183,6 @@
     <ClInclude Include="nmultithread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dSFMT-src-2.2.1\dSFMT.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="nrandom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -213,9 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="synth.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dSFMT-src-2.2.1\dSFMT.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

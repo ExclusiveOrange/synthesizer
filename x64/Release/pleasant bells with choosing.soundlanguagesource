@@ -16,8 +16,8 @@ gf1 = g1 * halfstep;
 
 
 
-duration = 7;
-baseAmplitude = 10 @ 2;
+duration = 10 @ 2;
+baseAmplitude = 1 @ 0.4;
 
 minOctave = 2;
 maxOctave = 5.999999;
@@ -77,9 +77,8 @@ amplitude = baseAmplitude / bellFrequency^.5;
 sine r2, amplitude, r3, 0;
 
 
-
 ' generate ADSR envelope
-ramptime = duration / 1024;
+ramptime = 1/512;
 
 ' new exponential decay instruction
 0, duration;

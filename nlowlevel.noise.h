@@ -17,6 +17,8 @@ namespace nlowlevel {
 		,const double low
 		,const double high
 	) {
-		nrandom::uniform(dest, len, low, high);
+		for( int i = 0; i < len; i++ ) {
+			dest[ i ] = nrandom::uniform( low, high );
+		}
 	}
 }

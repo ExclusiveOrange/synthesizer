@@ -210,14 +210,15 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StructMemberAlignment>16Bytes</StructMemberAlignment>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <OpenMPSupport>false</OpenMPSupport>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <FloatingPointModel>Precise</FloatingPointModel>
+      <FloatingPointModel>Fast</FloatingPointModel>
       <BrowseInformation>false</BrowseInformation>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
     </ClCompile>
     <Link>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
@@ -295,7 +296,6 @@
   <ItemGroup>
     <ClInclude Include="constants.h" />
     <ClInclude Include="decaytable\decaytable.hpp" />
-    <ClInclude Include="dSFMT-src-2.2.1\dSFMT.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="naudiodevice.h" />
     <ClInclude Include="ncircularbuffer.h" />
@@ -359,7 +359,6 @@
     <ClInclude Include="sintable\sintable.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dSFMT-src-2.2.1\dSFMT.c" />
     <ClCompile Include="synth.cpp" />
   </ItemGroup>
   <ItemGroup>

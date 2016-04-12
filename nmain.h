@@ -36,7 +36,6 @@ namespace nmain {
 		maxworkstacksize = 65536; // somewhat arbitrary
 
 		//init_intel();
-		nrandom::init();
 		//numthreads = numthreads ? numthreads : ippGetNumCoresOnDie(); // not using intel stuff anymore
 		numthreads = 8; // TODO: detect number of virtual cores available, use them all
 

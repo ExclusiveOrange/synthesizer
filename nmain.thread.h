@@ -10,7 +10,6 @@ namespace nmain {
 	__declspec(thread) double *output;
 
 	void initproc() {
-		nrandom::init();
 		EnterCriticalSection(&csoutputstack);
 		output = outputstack[outputstackmax++];
 		LeaveCriticalSection(&csoutputstack);

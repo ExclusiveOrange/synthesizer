@@ -54,7 +54,7 @@ namespace decaytable {
 
 	const auto table_extra = 16;
 
-	__declspec( align( 32 ) )
+	//__declspec( align( 32 ) ) // unnecessary
 	static struct element {
 		elementtype val;
 		elementtype diff;
@@ -83,6 +83,8 @@ namespace decaytable {
 	lookup(
 		double zero_to_one
 	) {
+		static const element *table = decaytable::table;
+
 		auto composite = (int64_t)( zero_to_one * resolution_mask );
 		auto index = composite >> weightbits;
 		auto weight = composite & weightresolution_mask;

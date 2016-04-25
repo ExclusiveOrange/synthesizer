@@ -1,0 +1,24 @@
+duration = (1 @ 0.1) * 0.1;
+amplitude = (1 @ 0.2) * 0.3;
+
+0, duration;
+
+trickle = 0.05 @ 0.01;
+
+min = (50 # 300)^0.5;
+max = (3000 # (3000 # 8000))^0.5;
+line r4, min, max;
+mul r3, r4, r4;
+sine r2, amplitude * (1 - trickle), r3, 0;
+
+'a trickling sound (the very high frequency is highly aliased and doesn't produce any particular tone)
+sine r4, amplitude * trickle, (1 # 10) * 1000000000, 0;
+decay r5;
+mul r4, r4, r5;
+mul r4, r4, r5;
+
+add r3, r2, r4;
+'add r3, r4, 0;
+
+decay r2;
+mul r0, r2, r3;
